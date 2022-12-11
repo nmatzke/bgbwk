@@ -1,0 +1,4 @@
+student_names	grade1	grade2	grade3
+1	Nick	37	43	100
+2	Hillary	100	80	90
+3	Sonal	60	70	100

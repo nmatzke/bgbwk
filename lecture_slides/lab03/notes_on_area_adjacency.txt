@@ -1,0 +1,39 @@
+
+#######################################################
+# Constraints on the states/ranges in BioGeoBEARS
+#######################################################
+
+1. Adjacency to allow different ranges:
+
+By default, every combination of areas is allowed to make ranges
+
+If areas: A, B, C
+
+Then, the ranges (/states) are: null, A, B, C, AB, AC, BC, ABC
+(8 ranges or states)
+
+Now, pretend that areas A and C are not touching, and 
+pretend that we want to declare that areas must be touching
+for a species to occupy both of them. In that case, we could
+manually reduced the list of ranges/states to exclude
+range "AC".
+
+New ranges list: null, A, B, C, AB, BC, ABC (7 ranges/states)
+
+2. Area absence to control the state space
+
+Let's say area B disappears between 5-10 Ma
+
+ranges_lists: 
+0-5 Ma: null, A, B, C, AB, AC, BC, ABC
+5-10 Ma: null, A, C, AC
+10+ Ma: null, A, B, C, AB, AC, BC, ABC
+
+
+3. Control the state space by reducing max_range_size
+
+
+
+4. All of the above are different from controlling the
+*dispersal rates* based on distance or connectivity
+

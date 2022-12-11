@@ -1,0 +1,359 @@
+Several kinds of parameters in BioGeoBEARS:
+
+(we can access these parameters via the parameters table at:
+BioGeoBEARS_run_object$BioGeoBEARS_model_object@params_table
+
+I. Rate parameters:
+d, e, a -
+d = rate of dispersal (range-expansion) per m.y. Example: A->AB
+e = rate of 'extinction' (really extirpation) (range-loss) per m.y. Example: AB->A
+a = rate of "range-switching", i.e. anagenetic dispersal. E.g. A->B.
+The "a" parameter allows creation of a standard character model. (Markov-k or Mk)
+
+Rate parameter: range from 0-5 events per m.y.
+
+II. Cladogeneic Weight parameters
+
+These specify the relative weight of cladogenesis processes at a speciation event.
+
+If the ancestor is AB, we have these events at cladogenesis:
+AB -> A, AB (s)
+AB -> B, AB (s)
+AB -> A, B (v)
+AB -> AB,AB (y)
+
+What y, s, v, and j mean is they are just weights
+To get a probability: weight / sum_of_the_weights
+
+In Lagrange/DEC, y, s, and v are all 1, AND there must always be a daughter of size 1.
+
+AB -> A, AB (s)
+AB -> B, AB (s)
+AB -> A, B (v)
+AB -> AB, A (s)
+AB -> AB, B (s)
+AB -> B, A (v)
+AB -> AB,AB (y)  <- this gets 0 weight, it's disallowed
+
+s=1
+v=1
+
+total weight = 6
+probability of each of the 6 range-inheritance scenarios is 1/6
+
+In DEC+J, y, s, & v = (3-j)/3
+
+In DIVALIKE models, s=0. y & v = (2-j)/2
+
+In BAYAREALIKE models, s=0, v=0. y=(1-j)/1
+
+Weight parameters range from:
+j: 0-3, 0-2, 0-1
+y,s,v: 0-1
+
+To convert a j weight to a rate of jump dispersal:
+probability of a particular j-event at a cladogenesis event:
+j / sum_of_weights
+
+The *rate* of a particular j-event is 
+(j / sum_of_weights) * birthRate
+
+
+III. Parameters that are exponents on dispersal matrices
+
+x, w, n = these are exponents applied to dispersal matrices
+
+range of x,w,n = -5 to +5 
+0 means that a multiplier matrix has *NO EFFECT* on dispersal rates
+1 means that the matrix is used as-is. (This is the Lagrange DEC assumption, w=1.)
+-1 means inverse distance weighting
+-2 mean inverse distance^2
+
+# Lagrange used dispersal multiper matrix
+dispersal_rate = d * (dispersal_multiplier_matrix)
+
+
+# BioGeoBEARS dispersal multiplier matrix
+dispersal_rate = d * (dispersal_multiplier_matrix)^w
+
+...where w is a fixed or a free parameter
+
+If you guessed that a barrier causes a 0.1 dispersal multiplier,
+but your ML estimate of w=-1, then the true multiplier
+was 0.1^-1 = 10.
+
+# BioGeoBEARS distance matrix (+x model variants)
+dispersal_rate = d * (distance_matrix)^x
+
+# BioGeoBEARS environmental distance matrix (+n model variants)
+dispersal_rate = d * (environmental_distance_matrix)^n
+
+DEC+x+n+w
+DEC+J+x+n+w
+
+
+EXAMPLE:
+
+Hypothesis: distance and connectivity influence dispersal
+
+3 areas: A, B, C
+
+Distance matrix:
+
+	A			B		C
+A -		100	200
+B 100	 - 	100
+C	200	100	 - 
+
+I like to convert to multiples of smallest nonzero distance:
+(this helps keep the rate parameters within the default bounds)
+
+Normalized distance matrix:
+
+NDM:
+	A		B		C
+A -		1		2
+B 1		-		1
+C	2		1 	- 
+
+This normalized distance matrix will be taken to the power "x"
+
+
+
+Manual dispersal multipliers indicating connectivity:
+(A and B are connected, A and C are not)
+
+MDM:
+	A			B		C
+A 1			1		0.1
+B 1			-		1
+C	0.1		1 	- 
+
+The Manual dispersal multiplier matrix is taken to the power "w"
+
+In the full model, dispersal rate:
+
+DEC+x+w:
+actual_dispersal_rate = d_base * NDM^x * MDM^w
+
+Simpler models:
+
+DEC+x:
+w is fixed to the value 0.0
+actual_dispersal_rate = d_base * NDM^x * MDM^0
+actual_dispersal_rate = d_base * NDM^x * 1s
+actual_dispersal_rate = d_base * NDM^x
+
+DEC+w:
+x is fixed to the value 0.0
+actual_dispersal_rate = d_base * NDM^0 * MDM^w
+actual_dispersal_rate = d_base * 1s * MDM^w
+actual_dispersal_rate = d_base * MDM^w
+
+DEC:
+
+x and w are fixed to the value 0.0
+actual_dispersal_rate = d_base * NDM^0 * MDM^0
+actual_dispersal_rate = d_base * 1s * 1s
+actual_dispersal_rate = d_base
+
+Let's say the ML inference was 
+x = -1
+w = 2
+
+NDM^x=-1:
+	A		B		C
+A -		1		1/2
+B 1		-		1
+C	1/2		1 	- 
+
+NDM^x=-2:
+	A		B		C
+A -		1		1/4
+B 1		-		1
+C	1/4		1 	- 
+
+MDM^w=2
+	A			B		C
+A 1			1		0.01
+B 1			-		1
+C	0.01		1 	- 
+
+
+
+
+NOTES ON OPTIMIZERS
+
+BioGeoBEARS can use 3 different optimizers:
+
+optim (from base R)
+
+optimx package - optimx is more flexible than optim; it includes bounded searches, and it seems to work better than optim usually
+* these work well on 1-4, sometimes more
+
+GenSA package - Generalized Simulated Annealing;
+* uses "high temperature" to explore wide range of param values;
+* gradually lowers temperature to focus in on best solutions
+* GenSA is slower, but more thorough. Designed for lots of parameters; sometimes fails on 1-2 parameter problems
+
+How to switch:
+BioGeoBEARS_model_object$use_optimx = FALSE # uses optim
+BioGeoBEARS_model_object$use_optimx = TRUE # uses optimx
+BioGeoBEARS_model_object$use_optimx = "GenSA" # uses GenSA
+
+
+
+
+#######################################################
+# Running long scripts from command line:
+#######################################################
+
+Rscript 04_example_trait_script_DEC_v1.R | tee screenoutput.txt &
+
+| = pipe
+tee = lets output go to both the screen and to a text file
+& = allows you to type other commands while the script is running
+
+
+#######################################################
+# How to test a specific hypothesis about a geographic
+# range at a particular node
+# (e.g. the node ancestral to a specific species or population)
+#######################################################
+
+0. Look at the pie charts and eyeball it
+
+1. Look at the ancestral range probabilities at the node:
+
+# Look at the results in res
+names(res)
+
+# The ancestral range probaiblities are in:
+res$ML_marginal_prob_each_state_at_branch_top_AT_node
+dim(res$ML_marginal_prob_each_state_at_branch_top_AT_node)
+# 37 16
+# 16 possible ranges
+# 37 nodes
+# In any bifurcating tree (ie fully resolved), there will 
+# n tip species/populations and (n-1) internal nodes
+#
+# Psychotria has 19 tips, 18 internal nodes, 37 nodes total
+# 
+
+# To look at those probabilities, it help to round them
+round(res$ML_marginal_prob_each_state_at_branch_top_AT_node, digits=2)
+# The first 19 rows of the matrix are tips
+# The range was observed at each tip so is 100% certain
+
+# The 20th node is the root node
+round(res$ML_marginal_prob_each_state_at_branch_top_AT_node[20,], digits=2)
+round(res$ML_marginal_prob_each_state_at_branch_top_AT_node[20,], digits=4)
+
+# Ranges as text:
+# This is the list of states/ranges, where each state/range
+# is a list of areas, counting from 0
+# http://phylo.wikidot.com/example-biogeobears-scripts#list_of_ranges
+
+areas = c("K","O","M","H")
+states_list_0based = rcpp_areas_list_to_states_list(areas=areas, maxareas=max_range_size, include_null_range=TRUE)
+
+# Make the list of ranges
+ranges_list = NULL
+for (i in 1:length(states_list_0based))
+    {    
+    if ( (length(states_list_0based[[i]]) == 1) && (is.na(states_list_0based[[i]])) )
+        {
+        tmprange = "_"
+        } else {
+        tmprange = paste(areas[states_list_0based[[i]]+1], collapse="")
+        }
+    ranges_list = c(ranges_list, tmprange)
+    }
+
+# Look at the ranges list
+ranges_list
+
+
+# How to find what node number corresponds to which node
+# on a graphic?
+
+Node numbering in APE/BioGeoBEARS
+http://phylo.wikidot.com/example-biogeobears-scripts#node_numbering
+
+
+ntips = length(tr$tip.label)
+Rnodenums = (ntips+1):(ntips+tr$Nnode)
+tipnums = 1:ntips
+plot(tr, label.offset=0.25, cex=1.25)
+axisPhylo()
+tiplabels(cex=1.5)
+nodelabels(text=Rnodenums, node=Rnodenums, cex=1.5)
+title("APE/BioGeoBEARS node numbers")
+
+
+# To get a table containing all of the phylogeny's information,
+# including node numbers, branch lengths, etc.:
+
+# prt = print tree to table
+prt(tr, printflag=FALSE)
+
+# Add a unique text identifier for each node
+prt(tr, printflag=FALSE, get_tipnames=TRUE)
+
+# prt is also useful when interpreting Biogeographic
+# Stochastic Mapping tables, which use the same
+# basic format
+
+
+
+
+
+
+
+2. Do a formal likelihood-based test by fixing alternative
+ranges at that node with the fixnode and fixlikes argument
+
+# Start by forcing the hypothesize range at a node into
+# the analysis
+
+# Specify the node to fix
+BioGeoBEARS_run_object$fixnode = 20
+
+# Specify its range
+BioGeoBEARS_run_object$fixlikes = c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1)
+
+# Then optimize ML like normal, compare lnL to any other hypotheses
+
+# You can also use fixnode and fixlikes to produce 
+# specific scenarios of interest, e.g. if you have a fossil
+# so you "know" the range of an ancestor, you can put that
+# in with fixnode/fixlikes
+
+# You can also have direct ancestors along branches, these
+# are represented as side-branches of very short length
+# Branches in newick files < 0.000001 (user-specified) are treated as
+# direct ancestors
+
+
+#######################################################
+# Pruning a tree from a tree of sampled individual 
+# specimens to a tree of OTUs/populations/species
+#######################################################
+
+How (and whether) to collapse tips to prune a tree
+http://phylo.wikidot.com/example-biogeobears-scripts#pruning_a_tree
+
+
+#######################################################
+# Looking for scripts/code that does specific tasks:
+# Search the...
+# BioGeoBEARS Google Group (google it)
+#######################################################
+
+
+
+
+Plot per-area probability (probability of each each area at each node)
+http://phylo.wikidot.com/example-biogeobears-scripts#per-area_probabilities
+
+
