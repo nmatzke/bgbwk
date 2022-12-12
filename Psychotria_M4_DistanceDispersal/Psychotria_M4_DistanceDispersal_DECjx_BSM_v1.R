@@ -329,7 +329,7 @@ check_BioGeoBEARS_run(BioGeoBEARS_run_object)
 
 # For a slow analysis, run once, then set runslow=FALSE to just 
 # load the saved result.
-runslow = TRUE
+runslow = FALSE
 resfn = "Psychotria_DEC_M4_distances_v1.Rdata"
 if (runslow)
     {
@@ -416,7 +416,7 @@ BioGeoBEARS_run_object$BioGeoBEARS_model_object@params_table["x","est"] = xstart
 check_BioGeoBEARS_run(BioGeoBEARS_run_object)
 
 resfn = "Psychotria_DEC+J_M4_distances_v1.Rdata"
-runslow = TRUE
+runslow = FALSE
 if (runslow)
     {
     #sourceall("/Dropbox/_njm/__packages/BioGeoBEARS_setup/")

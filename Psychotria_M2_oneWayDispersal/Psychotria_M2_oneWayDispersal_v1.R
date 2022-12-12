@@ -47,7 +47,8 @@ library(BioGeoBEARS)
 # SET THE WORKING DIRECTORY IF NEEDED
 #wd = "/drives/GDrive/__classes/BIOSCI395/lab/BGBlab/Psychotria_M0_equalRates/"
 #wd = "Psychotria_M0_equalRates/"
-#setwd(wd)
+wd = "/GitHub/bgbwk/Psychotria_M2_oneWayDispersal/"
+setwd(wd)
 
 # Double-check your working directory with getwd()
 getwd()
@@ -114,9 +115,9 @@ moref(trfn)
 
 tr = read.tree(trfn)
 tr
-plot(tr)
-title("Example Psychotria phylogeny from Ree & Smith (2008)")
-axisPhylo() # plots timescale
+#plot(tr)
+#title("Example Psychotria phylogeny from Ree & Smith (2008)")
+#axisPhylo() # plots timescale
 
 
 #######################################################
@@ -324,7 +325,7 @@ check_BioGeoBEARS_run(BioGeoBEARS_run_object)
 
 # For a slow analysis, run once, then set runslow=FALSE to just 
 # load the saved result.
-runslow = TRUE
+runslow = FALSE
 resfn = "Psychotria_DEC_M2_oneWayDispersal_v1.Rdata"
 if (runslow)
     {
@@ -404,7 +405,7 @@ BioGeoBEARS_run_object$BioGeoBEARS_model_object@params_table["j","est"] = jstart
 check_BioGeoBEARS_run(BioGeoBEARS_run_object)
 
 resfn = "Psychotria_DEC+J_M2_oneWayDispersal_v1.Rdata"
-runslow = TRUE
+runslow = FALSE
 if (runslow)
     {
     #sourceall("/Dropbox/_njm/__packages/BioGeoBEARS_setup/")
@@ -424,8 +425,8 @@ if (runslow)
 #######################################################
 # PDF plots
 #######################################################
-# pdffn = "Psychotria_DEC_vs_DEC+J_M2_oneWayDispersal_v1.pdf"
-# pdf(pdffn, width=6, height=6)
+pdffn = "Psychotria_DEC_vs_DEC+J_M2_oneWayDispersal_v1.pdf"
+pdf(pdffn, width=6, height=6)
 
 #######################################################
 # Plot ancestral states - DEC
@@ -548,7 +549,7 @@ BioGeoBEARS_run_object$BioGeoBEARS_model_object@params_table["mx01v","est"] = 0.
 
 check_BioGeoBEARS_run(BioGeoBEARS_run_object)
 
-runslow = TRUE
+runslow = FALSE
 resfn = "Psychotria_DIVALIKE_M2_oneWayDispersal_v1.Rdata"
 if (runslow)
     {
@@ -647,7 +648,7 @@ BioGeoBEARS_run_object$BioGeoBEARS_model_object@params_table["j","max"] = 1.9999
 check_BioGeoBEARS_run(BioGeoBEARS_run_object)
 
 resfn = "Psychotria_DIVALIKE+J_M2_oneWayDispersal_v1.Rdata"
-runslow = TRUE
+runslow = FALSE
 if (runslow)
     {
     #sourceall("/Dropbox/_njm/__packages/BioGeoBEARS_setup/")
@@ -664,8 +665,8 @@ if (runslow)
     resDIVALIKEj = res
     }
 
-# pdffn = "Psychotria_DIVALIKE_vs_DIVALIKE+J_M2_oneWayDispersal_v1.pdf"
-# pdf(pdffn, width=6, height=6)
+pdffn = "Psychotria_DIVALIKE_vs_DIVALIKE+J_M2_oneWayDispersal_v1.pdf"
+pdf(pdffn, width=6, height=6)
 
 #######################################################
 # Plot ancestral states - DIVALIKE
@@ -697,9 +698,10 @@ res1 = plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=l
 # Pie chart
 plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=list("j"), plotwhat="pie", label.offset=0.45, tipcex=0.7, statecex=0.7, splitcex=0.6, titlecex=0.8, plotsplits=TRUE, cornercoords_loc=scriptdir, include_null_range=TRUE, tr=tr, tipranges=tipranges)
 
-# dev.off()
-# cmdstr = paste("open ", pdffn, sep="")
-# system(cmdstr)
+dev.off()
+cmdstr = paste("open ", pdffn, sep="")
+system(cmdstr)
+
 
 #######################################################
 #######################################################
@@ -811,7 +813,7 @@ BioGeoBEARS_run_object$BioGeoBEARS_model_object@params_table["mx01y","est"] = 0.
 # Check the inputs
 check_BioGeoBEARS_run(BioGeoBEARS_run_object)
 
-runslow = TRUE
+runslow = FALSE
 resfn = "Psychotria_BAYAREALIKE_M2_oneWayDispersal_v1.Rdata"
 if (runslow)
     {
@@ -931,7 +933,7 @@ BioGeoBEARS_run_object$BioGeoBEARS_model_object@params_table["j","max"] = 0.9999
 check_BioGeoBEARS_run(BioGeoBEARS_run_object)
 
 resfn = "Psychotria_BAYAREALIKE+J_M2_oneWayDispersal_v1.Rdata"
-runslow = TRUE
+runslow = FALSE
 if (runslow)
     {
     res = bears_optim_run(BioGeoBEARS_run_object)
@@ -946,8 +948,8 @@ if (runslow)
     resBAYAREALIKEj = res
     }
 
-# pdffn = "Psychotria_BAYAREALIKE_vs_BAYAREALIKE+J_M2_oneWayDispersal_v1.pdf"
-# pdf(pdffn, width=6, height=6)
+pdffn = "Psychotria_BAYAREALIKE_vs_BAYAREALIKE+J_M2_oneWayDispersal_v1.pdf"
+pdf(pdffn, width=6, height=6)
 
 #######################################################
 # Plot ancestral states - BAYAREALIKE
@@ -979,9 +981,10 @@ res1 = plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=l
 # Pie chart
 plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=list("j"), plotwhat="pie", label.offset=0.45, tipcex=0.7, statecex=0.7, splitcex=0.6, titlecex=0.8, plotsplits=TRUE, cornercoords_loc=scriptdir, include_null_range=TRUE, tr=tr, tipranges=tipranges)
 
-# dev.off()
-# cmdstr = paste("open ", pdffn, sep="")
-# system(cmdstr)
+dev.off()
+cmdstr = paste("open ", pdffn, sep="")
+system(cmdstr)
+
 
 
 

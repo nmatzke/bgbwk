@@ -1,0 +1,394 @@
+[1] "/GitHub/bgbwk/Psychotria_M2_oneWayDispersal"
+[1] "/Library/Frameworks/R.framework/Versions/4.1/Resources/library/BioGeoBEARS/extdata"
+ [1] "a_scripts"                                
+ [2] "examples"                                 
+ [3] "Hawaii_abbreviations_table.txt"           
+ [4] "Psychotria_5.2_old_not_ultrametric.newick"
+ [5] "Psychotria_5.2_ultrametric.newick"        
+ [6] "Psychotria_5.2.newick"                    
+ [7] "Psychotria_controls_v1.txt"               
+ [8] "Psychotria_detections_v1.txt"             
+ [9] "Psychotria_geog_noAreaNames.data"         
+[10] "Psychotria_geog.data"                     
+[11] "z_old_code"                               
+((((((((P_hawaiiensis_WaikamoiL1:0.9665748366,P_mauiensis_Eke:0.9665748366):0.7086257935,(P_fauriei2:1.231108298,P_hathewayi_1:1.231108298):0.4440923324):0.1767115552,(P_kaduana_PuuKukuiAS:1.851022399,P_mauiensis_PepeAS:1.851022399):0.0008897862802):0.3347375986,P_kaduana_HawaiiLoa:2.186649784):0.302349378,(P_greenwelliae07:1.132253042,P_greenwelliae907:1.132253042):1.35674612):1.689170274,((((P_mariniana_MauiNui:1.99490084,P_hawaiiensis_Makaopuhi:1.99490084):0.7328279804,P_mariniana_Oahu:2.72772882):0.2574151709,P_mariniana_Kokee2:2.985143991):0.4601084855,P_wawraeDL7428:3.445252477):0.732916959):0.7345185743,(P_grandiflora_Kal2:2.480190277,P_hobdyi_Kuia:2.480190277):2.432497733):0.2873119899,((P_hexandra_K1:2.364873976,P_hexandra_M:2.364873976):0.4630447802,P_hexandra_Oahu:2.827918756):2.372081244);
+
+Phylogenetic tree with 19 tips and 18 internal nodes.
+
+Tip labels:
+  P_hawaiiensis_WaikamoiL1, P_mauiensis_Eke, P_fauriei2, P_hathewayi_1, P_kaduana_PuuKukuiAS, P_mauiensis_PepeAS, ...
+
+Rooted; includes branch lengths.
+19	4 (K O M H)
+P_mariniana_Kokee2	1000
+P_mariniana_Oahu	0100
+P_mariniana_MauiNui	0010
+P_hawaiiensis_Makaopuhi	0001
+P_wawraeDL7428	1000
+P_kaduana_PuuKukuiAS	0010
+P_mauiensis_PepeAS	0010
+P_hawaiiensis_WaikamoiL1	0010
+P_mauiensis_Eke	0010
+P_fauriei2	0100
+P_hathewayi_1	0100
+P_kaduana_HawaiiLoa	0100
+P_greenwelliae07	1000
+P_greenwelliae907	1000
+P_grandiflora_Kal2	1000
+P_hobdyi_Kuia	1000
+P_hexandra_K1	1000
+P_hexandra_M	1000
+P_hexandra_Oahu	0100
+An object of class "tipranges"
+numeric(0)
+Slot "df":
+                         K O M H
+P_mariniana_Kokee2       1 0 0 0
+P_mariniana_Oahu         0 1 0 0
+P_mariniana_MauiNui      0 0 1 0
+P_hawaiiensis_Makaopuhi  0 0 0 1
+P_wawraeDL7428           1 0 0 0
+P_kaduana_PuuKukuiAS     0 0 1 0
+P_mauiensis_PepeAS       0 0 1 0
+P_hawaiiensis_WaikamoiL1 0 0 1 0
+P_mauiensis_Eke          0 0 1 0
+P_fauriei2               0 1 0 0
+P_hathewayi_1            0 1 0 0
+P_kaduana_HawaiiLoa      0 1 0 0
+P_greenwelliae07         1 0 0 0
+P_greenwelliae907        1 0 0 0
+P_grandiflora_Kal2       1 0 0 0
+P_hobdyi_Kuia            1 0 0 0
+P_hexandra_K1            1 0 0 0
+P_hexandra_M             1 0 0 0
+P_hexandra_Oahu          0 1 0 0
+
+[1] 1
+[1] 16
+[1] 15
+[1] 15
+[1] 11
+[1] 1024
+[1] 56
+$geogfn
+[1] "/Library/Frameworks/R.framework/Versions/4.1/Resources/library/BioGeoBEARS/extdata/Psychotria_geog.data"
+
+$trfn
+[1] "/Library/Frameworks/R.framework/Versions/4.1/Resources/library/BioGeoBEARS/extdata/Psychotria_5.2.newick"
+
+$abbr
+[1] "default"
+
+$description
+[1] "defaults"
+
+$BioGeoBEARS_model_object
+An object of class "BioGeoBEARS_model"
+Slot "params_table":
+         type    init      min      max     est                note
+d        free 0.01000  1.0e-12  5.00000 0.01000               works
+e        free 0.01000  1.0e-12  5.00000 0.01000               works
+a       fixed 0.00000  1.0e-12  5.00000 0.00000               works
+b       fixed 1.00000  1.0e-12  1.00000 1.00000 non-stratified only
+x       fixed 0.00000 -2.5e+00  2.50000 0.00000               works
+n       fixed 0.00000 -1.0e+01 10.00000 0.00000               works
+w       fixed 1.00000 -1.0e+01 10.00000 1.00000               works
+u       fixed 0.00000 -1.0e+01 10.00000 0.00000               works
+j       fixed 0.00000  1.0e-05  2.99999 0.00000               works
+ysv       3-j 2.99999  1.0e-05  3.00000 2.99999               works
+ys    ysv*2/3 1.99999  1.0e-05  2.00000 1.99999               works
+y     ysv*1/3 1.00000  1.0e-05  1.00000 1.00000               works
+s     ysv*1/3 1.00000  1.0e-05  1.00000 1.00000               works
+v     ysv*1/3 1.00000  1.0e-05  1.00000 1.00000               works
+mx01    fixed 0.00010  1.0e-04  0.99990 0.00010               works
+mx01j    mx01 0.00010  1.0e-04  0.99990 0.00010               works
+mx01y    mx01 0.00010  1.0e-04  0.99990 0.00010               works
+mx01s    mx01 0.00010  1.0e-04  0.99990 0.00010               works
+mx01v    mx01 0.00010  1.0e-04  0.99990 0.00010               works
+mx01r   fixed 0.50000  1.0e-04  0.99990 0.50000                  no
+mf      fixed 0.10000  5.0e-03  0.99500 0.10000                 yes
+dp      fixed 1.00000  5.0e-03  0.99500 1.00000                 yes
+fdp     fixed 0.00000  5.0e-03  0.99500 0.00000                 yes
+                                                                       desc
+d                         anagenesis: rate of 'dispersal' (range expansion)
+e                      anagenesis: rate of 'extinction' (range contraction)
+a           anagenesis: rate of range-switching (i.e. for a standard char.)
+b                                    anagenesis: exponent on branch lengths
+x                                   exponent on distance (modifies d, j, a)
+n                     exponent on environmental distance (modifies d, j, a)
+w               exponent on manual dispersal multipliers (modifies d, j, a)
+u            anagenesis: exponent on extinction risk with area (modifies e)
+j                 cladogenesis: relative per-event weight of jump dispersal
+ysv                                                     cladogenesis: y+s+v
+ys                                                        cladogenesis: y+s
+y       cladogenesis: relative per-event weight of sympatry (range-copying)
+s              cladogenesis: relative per-event weight of subset speciation
+v           cladogenesis: relative per-event weight of vicariant speciation
+mx01                  cladogenesis: controls range size of smaller daughter
+mx01j                 cladogenesis: controls range size of smaller daughter
+mx01y                 cladogenesis: controls range size of smaller daughter
+mx01s                 cladogenesis: controls range size of smaller daughter
+mx01v                 cladogenesis: controls range size of smaller daughter
+mx01r                       root: controls range size probabilities of root
+mf                         mean frequency of truly sampling OTU of interest
+dp                 detection probability per true sample of OTU of interest
+fdp   false detection of OTU probability per true taphonomic control sample
+
+
+$timesfn
+[1] NA
+
+$distsfn
+[1] NA
+
+$dispersal_multipliers_fn
+[1] "/Library/Frameworks/R.framework/Versions/4.1/Resources/library/BioGeoBEARS/extdata/examples/Psychotria_M2/BGB/dispersal_multipliers.txt"
+
+$area_of_areas_fn
+[1] NA
+
+$areas_allowed_fn
+[1] NA
+
+$areas_adjacency_fn
+[1] NA
+
+$detects_fn
+[1] NA
+
+$controls_fn
+[1] NA
+
+$max_range_size
+[1] 4
+
+$force_sparse
+[1] FALSE
+
+$use_detection_model
+[1] FALSE
+
+$print_optim
+[1] TRUE
+
+$printlevel
+[1] 0
+
+$on_NaN_error
+[1] -1e+50
+
+$wd
+[1] "/GitHub/bgbwk/Psychotria_M2_oneWayDispersal"
+
+$num_cores_to_use
+[1] 1
+
+$cluster_already_open
+[1] FALSE
+
+$use_optimx
+[1] TRUE
+
+$rescale_params
+[1] FALSE
+
+$return_condlikes_table
+[1] TRUE
+
+$calc_TTL_loglike_from_condlikes_table
+[1] TRUE
+
+$calc_ancprobs
+[1] TRUE
+
+$speedup
+[1] TRUE
+
+$include_null_range
+[1] TRUE
+
+$useAmbiguities
+[1] FALSE
+
+$min_branchlength
+[1] 1e-06
+
+$list_of_dispersal_multipliers_mats
+$list_of_dispersal_multipliers_mats[[1]]
+  K O M H
+1 1 1 0 0
+2 0 1 1 0
+3 0 0 1 1
+4 0 0 0 1
+
+
+An object of class "BioGeoBEARS_model"
+Slot "params_table":
+         type    init      min      max     est                note
+d        free 0.01000  1.0e-12  5.00000 0.01000               works
+e        free 0.01000  1.0e-12  5.00000 0.01000               works
+a       fixed 0.00000  1.0e-12  5.00000 0.00000               works
+b       fixed 1.00000  1.0e-12  1.00000 1.00000 non-stratified only
+x       fixed 0.00000 -2.5e+00  2.50000 0.00000               works
+n       fixed 0.00000 -1.0e+01 10.00000 0.00000               works
+w       fixed 1.00000 -1.0e+01 10.00000 1.00000               works
+u       fixed 0.00000 -1.0e+01 10.00000 0.00000               works
+j       fixed 0.00000  1.0e-05  2.99999 0.00000               works
+ysv       3-j 2.99999  1.0e-05  3.00000 2.99999               works
+ys    ysv*2/3 1.99999  1.0e-05  2.00000 1.99999               works
+y     ysv*1/3 1.00000  1.0e-05  1.00000 1.00000               works
+s     ysv*1/3 1.00000  1.0e-05  1.00000 1.00000               works
+v     ysv*1/3 1.00000  1.0e-05  1.00000 1.00000               works
+mx01    fixed 0.00010  1.0e-04  0.99990 0.00010               works
+mx01j    mx01 0.00010  1.0e-04  0.99990 0.00010               works
+mx01y    mx01 0.00010  1.0e-04  0.99990 0.00010               works
+mx01s    mx01 0.00010  1.0e-04  0.99990 0.00010               works
+mx01v    mx01 0.00010  1.0e-04  0.99990 0.00010               works
+mx01r   fixed 0.50000  1.0e-04  0.99990 0.50000                  no
+mf      fixed 0.10000  5.0e-03  0.99500 0.10000                 yes
+dp      fixed 1.00000  5.0e-03  0.99500 1.00000                 yes
+fdp     fixed 0.00000  5.0e-03  0.99500 0.00000                 yes
+                                                                       desc
+d                         anagenesis: rate of 'dispersal' (range expansion)
+e                      anagenesis: rate of 'extinction' (range contraction)
+a           anagenesis: rate of range-switching (i.e. for a standard char.)
+b                                    anagenesis: exponent on branch lengths
+x                                   exponent on distance (modifies d, j, a)
+n                     exponent on environmental distance (modifies d, j, a)
+w               exponent on manual dispersal multipliers (modifies d, j, a)
+u            anagenesis: exponent on extinction risk with area (modifies e)
+j                 cladogenesis: relative per-event weight of jump dispersal
+ysv                                                     cladogenesis: y+s+v
+ys                                                        cladogenesis: y+s
+y       cladogenesis: relative per-event weight of sympatry (range-copying)
+s              cladogenesis: relative per-event weight of subset speciation
+v           cladogenesis: relative per-event weight of vicariant speciation
+mx01                  cladogenesis: controls range size of smaller daughter
+mx01j                 cladogenesis: controls range size of smaller daughter
+mx01y                 cladogenesis: controls range size of smaller daughter
+mx01s                 cladogenesis: controls range size of smaller daughter
+mx01v                 cladogenesis: controls range size of smaller daughter
+mx01r                       root: controls range size probabilities of root
+mf                         mean frequency of truly sampling OTU of interest
+dp                 detection probability per true sample of OTU of interest
+fdp   false detection of OTU probability per true taphonomic control sample
+
+         type    init      min      max     est                note
+d        free 0.01000  1.0e-12  5.00000 0.01000               works
+e        free 0.01000  1.0e-12  5.00000 0.01000               works
+a       fixed 0.00000  1.0e-12  5.00000 0.00000               works
+b       fixed 1.00000  1.0e-12  1.00000 1.00000 non-stratified only
+x       fixed 0.00000 -2.5e+00  2.50000 0.00000               works
+n       fixed 0.00000 -1.0e+01 10.00000 0.00000               works
+w       fixed 1.00000 -1.0e+01 10.00000 1.00000               works
+u       fixed 0.00000 -1.0e+01 10.00000 0.00000               works
+j       fixed 0.00000  1.0e-05  2.99999 0.00000               works
+ysv       3-j 2.99999  1.0e-05  3.00000 2.99999               works
+ys    ysv*2/3 1.99999  1.0e-05  2.00000 1.99999               works
+y     ysv*1/3 1.00000  1.0e-05  1.00000 1.00000               works
+s     ysv*1/3 1.00000  1.0e-05  1.00000 1.00000               works
+v     ysv*1/3 1.00000  1.0e-05  1.00000 1.00000               works
+mx01    fixed 0.00010  1.0e-04  0.99990 0.00010               works
+mx01j    mx01 0.00010  1.0e-04  0.99990 0.00010               works
+mx01y    mx01 0.00010  1.0e-04  0.99990 0.00010               works
+mx01s    mx01 0.00010  1.0e-04  0.99990 0.00010               works
+mx01v    mx01 0.00010  1.0e-04  0.99990 0.00010               works
+mx01r   fixed 0.50000  1.0e-04  0.99990 0.50000                  no
+mf      fixed 0.10000  5.0e-03  0.99500 0.10000                 yes
+dp      fixed 1.00000  5.0e-03  0.99500 1.00000                 yes
+fdp     fixed 0.00000  5.0e-03  0.99500 0.00000                 yes
+                                                                       desc
+d                         anagenesis: rate of 'dispersal' (range expansion)
+e                      anagenesis: rate of 'extinction' (range contraction)
+a           anagenesis: rate of range-switching (i.e. for a standard char.)
+b                                    anagenesis: exponent on branch lengths
+x                                   exponent on distance (modifies d, j, a)
+n                     exponent on environmental distance (modifies d, j, a)
+w               exponent on manual dispersal multipliers (modifies d, j, a)
+u            anagenesis: exponent on extinction risk with area (modifies e)
+j                 cladogenesis: relative per-event weight of jump dispersal
+ysv                                                     cladogenesis: y+s+v
+ys                                                        cladogenesis: y+s
+y       cladogenesis: relative per-event weight of sympatry (range-copying)
+s              cladogenesis: relative per-event weight of subset speciation
+v           cladogenesis: relative per-event weight of vicariant speciation
+mx01                  cladogenesis: controls range size of smaller daughter
+mx01j                 cladogenesis: controls range size of smaller daughter
+mx01y                 cladogenesis: controls range size of smaller daughter
+mx01s                 cladogenesis: controls range size of smaller daughter
+mx01v                 cladogenesis: controls range size of smaller daughter
+mx01r                       root: controls range size probabilities of root
+mf                         mean frequency of truly sampling OTU of interest
+dp                 detection probability per true sample of OTU of interest
+fdp   false detection of OTU probability per true taphonomic control sample
+[1] TRUE
+[1] TRUE
+        LnL nparams         d           e j
+1 -31.41199       2 0.1145733 0.008672398 0
+        LnL nparams     d     e         j
+1 -16.67391       3 1e-12 1e-12 0.2846963
+[1] TRUE
+[1] TRUE
+        LnL nparams         d     e j
+1 -29.06321       2 0.1420114 1e-12 0
+       LnL nparams     d     e         j
+1 -16.8805       3 1e-12 1e-12 0.2745202
+pdf 
+  3 
+[1] TRUE
+[1] TRUE
+        LnL nparams          d         e j
+1 -40.23236       2 0.02561326 0.2679553 0
+        LnL nparams     d     e         j
+1 -16.88051       3 1e-07 1e-07 0.2413799
+pdf 
+  3 
+[1] -31.41199
+         type        init      min      max         est                note
+d        free 0.114573278  1.0e-12  5.00000 0.114573278               works
+e        free 0.008672398  1.0e-12  5.00000 0.008672398               works
+a       fixed 0.000000000  1.0e-12  5.00000 0.000000000               works
+b       fixed 1.000000000  1.0e-12  1.00000 1.000000000 non-stratified only
+x       fixed 0.000000000 -2.5e+00  2.50000 0.000000000               works
+n       fixed 0.000000000 -1.0e+01 10.00000 0.000000000               works
+w       fixed 1.000000000 -1.0e+01 10.00000 1.000000000               works
+u       fixed 0.000000000 -1.0e+01 10.00000 0.000000000               works
+j       fixed 0.000000000  1.0e-05  2.99999 0.000000000               works
+ysv       3-j 2.999990000  1.0e-05  3.00000 3.000000000               works
+ys    ysv*2/3 1.999990000  1.0e-05  2.00000 2.000000000               works
+y     ysv*1/3 1.000000000  1.0e-05  1.00000 1.000000000               works
+s     ysv*1/3 1.000000000  1.0e-05  1.00000 1.000000000               works
+v     ysv*1/3 1.000000000  1.0e-05  1.00000 1.000000000               works
+mx01    fixed 0.000100000  1.0e-04  0.99990 0.000100000               works
+mx01j    mx01 0.000100000  1.0e-04  0.99990 0.000100000               works
+mx01y    mx01 0.000100000  1.0e-04  0.99990 0.000100000               works
+mx01s    mx01 0.000100000  1.0e-04  0.99990 0.000100000               works
+mx01v    mx01 0.000100000  1.0e-04  0.99990 0.000100000               works
+mx01r   fixed 0.500000000  1.0e-04  0.99990 0.500000000                  no
+mf      fixed 0.100000000  5.0e-03  0.99500 0.100000000                 yes
+dp      fixed 1.000000000  5.0e-03  0.99500 1.000000000                 yes
+fdp     fixed 0.000000000  5.0e-03  0.99500 0.000000000                 yes
+                                                                       desc
+d                         anagenesis: rate of 'dispersal' (range expansion)
+e                      anagenesis: rate of 'extinction' (range contraction)
+a           anagenesis: rate of range-switching (i.e. for a standard char.)
+b                                    anagenesis: exponent on branch lengths
+x                                   exponent on distance (modifies d, j, a)
+n                     exponent on environmental distance (modifies d, j, a)
+w               exponent on manual dispersal multipliers (modifies d, j, a)
+u            anagenesis: exponent on extinction risk with area (modifies e)
+j                 cladogenesis: relative per-event weight of jump dispersal
+ysv                                                     cladogenesis: y+s+v
+ys                                                        cladogenesis: y+s
+y       cladogenesis: relative per-event weight of sympatry (range-copying)
+s              cladogenesis: relative per-event weight of subset speciation
+v           cladogenesis: relative per-event weight of vicariant speciation
+mx01                  cladogenesis: controls range size of smaller daughter
+mx01j                 cladogenesis: controls range size of smaller daughter
+mx01y                 cladogenesis: controls range size of smaller daughter
+mx01s                 cladogenesis: controls range size of smaller daughter
+mx01v                 cladogenesis: controls range size of smaller daughter
+mx01r                       root: controls range size probabilities of root
+mf                         mean frequency of truly sampling OTU of interest
+dp                 detection probability per true sample of OTU of interest
+fdp   false detection of OTU probability per true taphonomic control sample

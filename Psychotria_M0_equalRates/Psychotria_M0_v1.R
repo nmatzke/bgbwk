@@ -46,8 +46,8 @@ library(BioGeoBEARS)
 
 # SET THE WORKING DIRECTORY IF NEEDED
 # wd = "/drives/GDrive/__classes/BIOSCI395/lab/BGBlab/Psychotria_M0_equalRates/"
-#wd = "Psychotria_M0_equalRates/"
-# setwd(wd)
+wd = "/GitHub/bgbwk/Psychotria_M0_equalRates/"
+setwd(wd)
 
 # Double-check your working directory with getwd()
 getwd()
@@ -424,8 +424,8 @@ if (runslow)
 #######################################################
 # PDF plots
 #######################################################
-# pdffn = "Psychotria_DEC_vs_DEC+J_M0_unconstrained_v1.pdf"
-# pdf(pdffn, width=6, height=6)
+pdffn = "Psychotria_DEC_vs_DEC+J_M0_unconstrained_v1.pdf"
+pdf(pdffn, width=6, height=6)
 
 #######################################################
 # Plot ancestral states - DEC
@@ -457,9 +457,9 @@ res1 = plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=l
 # Pie chart
 plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=list("j"), plotwhat="pie", label.offset=0.45, tipcex=0.7, statecex=0.7, splitcex=0.6, titlecex=0.8, plotsplits=TRUE, cornercoords_loc=scriptdir, include_null_range=TRUE, tr=tr, tipranges=tipranges)
 
-# dev.off()  # Turn off PDF
-# cmdstr = paste("open ", pdffn, sep="")
-# system(cmdstr) # Plot it
+dev.off()  # Turn off PDF
+cmdstr = paste("open ", pdffn, sep="")
+system(cmdstr) # Plot it
 
 #######################################################
 #######################################################
@@ -664,8 +664,8 @@ if (runslow)
     resDIVALIKEj = res
     }
 
-# pdffn = "Psychotria_DIVALIKE_vs_DIVALIKE+J_M0_unconstrained_v1.pdf"
-# pdf(pdffn, width=6, height=6)
+pdffn = "Psychotria_DIVALIKE_vs_DIVALIKE+J_M0_unconstrained_v1.pdf"
+pdf(pdffn, width=6, height=6)
 
 #######################################################
 # Plot ancestral states - DIVALIKE
@@ -697,9 +697,9 @@ res1 = plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=l
 # Pie chart
 plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=list("j"), plotwhat="pie", label.offset=0.45, tipcex=0.7, statecex=0.7, splitcex=0.6, titlecex=0.8, plotsplits=TRUE, cornercoords_loc=scriptdir, include_null_range=TRUE, tr=tr, tipranges=tipranges)
 
-# dev.off()
-# cmdstr = paste("open ", pdffn, sep="")
-# system(cmdstr)
+dev.off()
+cmdstr = paste("open ", pdffn, sep="")
+system(cmdstr)
 
 #######################################################
 #######################################################
@@ -946,8 +946,8 @@ if (runslow)
     resBAYAREALIKEj = res
     }
 
-# pdffn = "Psychotria_BAYAREALIKE_vs_BAYAREALIKE+J_M0_unconstrained_v1.pdf"
-# pdf(pdffn, width=6, height=6)
+pdffn = "Psychotria_BAYAREALIKE_vs_BAYAREALIKE+J_M0_unconstrained_v1.pdf"
+pdf(pdffn, width=6, height=6)
 
 #######################################################
 # Plot ancestral states - BAYAREALIKE
@@ -979,9 +979,9 @@ res1 = plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=l
 # Pie chart
 plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=list("j"), plotwhat="pie", label.offset=0.45, tipcex=0.7, statecex=0.7, splitcex=0.6, titlecex=0.8, plotsplits=TRUE, cornercoords_loc=scriptdir, include_null_range=TRUE, tr=tr, tipranges=tipranges)
 
-# dev.off()
-# cmdstr = paste("open ", pdffn, sep="")
-# system(cmdstr)
+dev.off()
+cmdstr = paste("open ", pdffn, sep="")
+system(cmdstr)
 
 
 
@@ -1022,6 +1022,185 @@ resDEC$output@params_table
 
 
 
+#########################################################################
+#########################################################################
+#########################################################################
+#########################################################################
+# 
+# CALCULATE SUMMARY STATISTICS TO COMPARE
+# DEC, DEC+J, DIVALIKE, DIVALIKE+J, BAYAREALIKE, BAYAREALIKE+J
+# 
+#########################################################################
+#########################################################################
+#########################################################################
+#########################################################################
+
+#########################################################################
+#########################################################################
+# REQUIRED READING:
+#
+# Practical advice / notes / basic principles on statistical model 
+#    comparison in general, and in BioGeoBEARS:
+# http://phylo.wikidot.com/advice-on-statistical-model-comparison-in-biogeobears
+#########################################################################
+#########################################################################
+
+# Set up empty tables to hold the statistical results
+restable = NULL
+teststable = NULL
+
+#######################################################
+# Statistics -- DEC vs. DEC+J
+#######################################################
+# We have to extract the log-likelihood differently, depending on the 
+# version of optim/optimx
+LnL_2 = get_LnL_from_BioGeoBEARS_results_object(resDEC)
+LnL_1 = get_LnL_from_BioGeoBEARS_results_object(resDECj)
+
+numparams1 = 3
+numparams2 = 2
+stats = AICstats_2models(LnL_1, LnL_2, numparams1, numparams2)
+stats
+
+# DEC, null model for Likelihood Ratio Test (LRT)
+res2 = extract_params_from_BioGeoBEARS_results_object(results_object=resDEC, returnwhat="table", addl_params=c("j"), paramsstr_digits=4)
+# DEC+J, alternative model for Likelihood Ratio Test (LRT)
+res1 = extract_params_from_BioGeoBEARS_results_object(results_object=resDECj, returnwhat="table", addl_params=c("j"), paramsstr_digits=4)
+
+# The null hypothesis for a Likelihood Ratio Test (LRT) is that two models
+# confer the same likelihood on the data. See: Brian O'Meara's webpage:
+# http://www.brianomeara.info/tutorials/aic
+# ...for an intro to LRT, AIC, and AICc
+
+rbind(res2, res1)
+tmp_tests = conditional_format_table(stats)
+
+restable = rbind(restable, res2, res1)
+teststable = rbind(teststable, tmp_tests)
+
+#######################################################
+# Statistics -- DIVALIKE vs. DIVALIKE+J
+#######################################################
+# We have to extract the log-likelihood differently, depending on the 
+# version of optim/optimx
+LnL_2 = get_LnL_from_BioGeoBEARS_results_object(resDIVALIKE)
+LnL_1 = get_LnL_from_BioGeoBEARS_results_object(resDIVALIKEj)
+
+numparams1 = 3
+numparams2 = 2
+stats = AICstats_2models(LnL_1, LnL_2, numparams1, numparams2)
+stats
+
+# DIVALIKE, null model for Likelihood Ratio Test (LRT)
+res2 = extract_params_from_BioGeoBEARS_results_object(results_object=resDIVALIKE, returnwhat="table", addl_params=c("j"), paramsstr_digits=4)
+# DIVALIKE+J, alternative model for Likelihood Ratio Test (LRT)
+res1 = extract_params_from_BioGeoBEARS_results_object(results_object=resDIVALIKEj, returnwhat="table", addl_params=c("j"), paramsstr_digits=4)
+
+rbind(res2, res1)
+conditional_format_table(stats)
+
+tmp_tests = conditional_format_table(stats)
+
+restable = rbind(restable, res2, res1)
+teststable = rbind(teststable, tmp_tests)
+
+#######################################################
+# Statistics -- BAYAREALIKE vs. BAYAREALIKE+J
+#######################################################
+# We have to extract the log-likelihood differently, depending on the 
+# version of optim/optimx
+LnL_2 = get_LnL_from_BioGeoBEARS_results_object(resBAYAREALIKE)
+LnL_1 = get_LnL_from_BioGeoBEARS_results_object(resBAYAREALIKEj)
+
+numparams1 = 3
+numparams2 = 2
+stats = AICstats_2models(LnL_1, LnL_2, numparams1, numparams2)
+stats
+
+# BAYAREALIKE, null model for Likelihood Ratio Test (LRT)
+res2 = extract_params_from_BioGeoBEARS_results_object(results_object=resBAYAREALIKE, returnwhat="table", addl_params=c("j"), paramsstr_digits=4)
+# BAYAREALIKE+J, alternative model for Likelihood Ratio Test (LRT)
+res1 = extract_params_from_BioGeoBEARS_results_object(results_object=resBAYAREALIKEj, returnwhat="table", addl_params=c("j"), paramsstr_digits=4)
+
+rbind(res2, res1)
+conditional_format_table(stats)
+
+tmp_tests = conditional_format_table(stats)
+
+restable = rbind(restable, res2, res1)
+teststable = rbind(teststable, tmp_tests)
+
+#########################################################################
+# ASSEMBLE RESULTS TABLES: DEC, DEC+J, DIVALIKE, DIVALIKE+J, BAYAREALIKE, BAYAREALIKE+J
+#########################################################################
+teststable$alt = c("DEC+J", "DIVALIKE+J", "BAYAREALIKE+J")
+teststable$null = c("DEC", "DIVALIKE", "BAYAREALIKE")
+row.names(restable) = c("DEC", "DEC+J", "DIVALIKE", "DIVALIKE+J", "BAYAREALIKE", "BAYAREALIKE+J")
+restable = put_jcol_after_ecol(restable)
+restable
+
+# Look at the results!!
+restable
+teststable
+
+#######################################################
+# Save the results tables for later -- check for e.g.
+# convergence issues
+#######################################################
+
+# Loads to "restable"
+save(restable, file="restable_v1.Rdata")
+load(file="restable_v1.Rdata")
+
+# Loads to "teststable"
+save(teststable, file="teststable_v1.Rdata")
+load(file="teststable_v1.Rdata")
+
+# Also save to text files
+write.table(restable, file="restable.txt", quote=FALSE, sep="\t")
+write.table(unlist_df(teststable), file="teststable.txt", quote=FALSE, sep="\t")
+
+#######################################################
+# Model weights of all six models
+#######################################################
+restable2 = restable
+
+# With AICs:
+AICtable = calc_AIC_column(LnL_vals=restable$LnL, nparam_vals=restable$numparams)
+restable = cbind(restable, AICtable)
+restable_AIC_rellike = AkaikeWeights_on_summary_table(restable=restable, colname_to_use="AIC")
+restable_AIC_rellike = put_jcol_after_ecol(restable_AIC_rellike)
+restable_AIC_rellike
+
+# With AICcs -- factors in sample size
+samplesize = length(tr$tip.label)
+AICtable = calc_AICc_column(LnL_vals=restable$LnL, nparam_vals=restable$numparams, samplesize=samplesize)
+restable2 = cbind(restable2, AICtable)
+restable_AICc_rellike = AkaikeWeights_on_summary_table(restable=restable2, colname_to_use="AICc")
+restable_AICc_rellike = put_jcol_after_ecol(restable_AICc_rellike)
+restable_AICc_rellike
+
+# Also save to text files
+write.table(restable_AIC_rellike, file="restable_AIC_rellike.txt", quote=FALSE, sep="\t")
+write.table(restable_AICc_rellike, file="restable_AICc_rellike.txt", quote=FALSE, sep="\t")
+
+# Save with nice conditional formatting
+write.table(conditional_format_table(restable_AIC_rellike), file="restable_AIC_rellike_formatted.txt", quote=FALSE, sep="\t")
+write.table(conditional_format_table(restable_AICc_rellike), file="restable_AICc_rellike_formatted.txt", quote=FALSE, sep="\t")
+
+#######################################################
+# Your results should be:
+#######################################################
+
+# > restable
+# 
+#                 LnL numparams            d            e         j
+# DEC           -34.5         2 3.504546e-02 2.835632e-02 0.0000000
+# DEC+J         -20.9         3 1.000000e-12 1.000000e-12 0.1142811
+# DIVALIKE      -33.1         2 4.474416e-02 1.000000e-12 0.0000000
+# DIVALIKE+J    -21.1         3 2.001000e-09 1.000000e-12 0.1157199
+# BAYAREALIKE   -40.3         2 1.738085e-02 3.040188e-01 0.0000000
+# BAYAREALIKE+J -21.6         3 1.000000e-12 1.000000e-12 0.1081158
 
 
 
