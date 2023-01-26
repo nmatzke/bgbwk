@@ -325,7 +325,7 @@ check_BioGeoBEARS_run(BioGeoBEARS_run_object)
 
 # For a slow analysis, run once, then set runslow=FALSE to just 
 # load the saved result.
-runslow = FALSE
+runslow = TRUE
 resfn = "Psychotria_DEC_M2_oneWayDispersal_v1.Rdata"
 if (runslow)
     {
@@ -405,7 +405,7 @@ BioGeoBEARS_run_object$BioGeoBEARS_model_object@params_table["j","est"] = jstart
 check_BioGeoBEARS_run(BioGeoBEARS_run_object)
 
 resfn = "Psychotria_DEC+J_M2_oneWayDispersal_v1.Rdata"
-runslow = FALSE
+runslow = TRUE
 if (runslow)
     {
     #sourceall("/Dropbox/_njm/__packages/BioGeoBEARS_setup/")
@@ -458,9 +458,9 @@ res1 = plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=l
 # Pie chart
 plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=list("j"), plotwhat="pie", label.offset=0.45, tipcex=0.7, statecex=0.7, splitcex=0.6, titlecex=0.8, plotsplits=TRUE, cornercoords_loc=scriptdir, include_null_range=TRUE, tr=tr, tipranges=tipranges)
 
-# dev.off()  # Turn off PDF
-# cmdstr = paste("open ", pdffn, sep="")
-# system(cmdstr) # Plot it
+dev.off()  # Turn off PDF
+cmdstr = paste("open ", pdffn, sep="")
+system(cmdstr) # Plot it
 
 #######################################################
 #######################################################
