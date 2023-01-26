@@ -19,6 +19,9 @@ library(GenSA)
 # wd = "/drives/GDrive/__classes/BIOSCI395/lab/BGBlab/conifer_DEC_traits_models/"
 # setwd(wd)
 
+wd = "/GitHub/bgbwk/conifer_DEC_traits_models/"
+setwd(wd)
+
 # Get 395 locations in GitHub install
 extdata_dir = np(system.file("extdata", package="BioGeoBEARS"))
 scriptdir = np(system.file("extdata/a_scripts", package="BioGeoBEARS"))
@@ -347,7 +350,7 @@ BioGeoBEARS_run_object$force_sparse = FALSE
 BioGeoBEARS_run_object = fix_BioGeoBEARS_params_minmax(BioGeoBEARS_run_object)
 check_BioGeoBEARS_run(BioGeoBEARS_run_object)
 
-runslow = TRUE
+runslow = FALSE
 resfn = "DEC_inf.Rdata"
 if (runslow)
 	{
@@ -409,7 +412,7 @@ check_BioGeoBEARS_run(BioGeoBEARS_run_object)
 print("Printing warnings: 'warnings()':")
 print(warnings())
 
-runslow = TRUE
+runslow = FALSE
 resfn = "DECj_inf.Rdata"
 if (runslow)
 	{
@@ -528,7 +531,7 @@ check_BioGeoBEARS_run(BioGeoBEARS_run_object)
 
 
 
-runslow = TRUE
+runslow = FALSE
 resfn = "DEC+t12+t21+m2_inf.Rdata"
 if (runslow)
 	{
@@ -653,7 +656,7 @@ check_BioGeoBEARS_run(BioGeoBEARS_run_object)
 
 
 resfn = "DECJ+t12+t21+m2_inf.Rdata"
-runslow = TRUE
+runslow = FALSE
 if (runslow)
 	{
 	# Calculate the lnL for the parameters, and store in text file
