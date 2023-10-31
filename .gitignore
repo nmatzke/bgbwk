@@ -39,3 +39,7 @@ vignettes/*.pdf
 .Renviron
 lecture_slides/~$03_Matzke_distance_traits_biogeog_v2.pptx
 ~$workshop_notes.pptx
+.DS_Store
+lecture_slides/.DS_Store
+lecture_slides/lab04/.DS_Store
+lecture_slides/lab04/trait-dependence/.DS_Store
