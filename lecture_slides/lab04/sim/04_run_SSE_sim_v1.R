@@ -18,7 +18,7 @@ library(BioGeoBEARS)
 #######################################################
 # Set up the simulation parameters
 #######################################################
-wd = "/drives/GDrive/__GDrive_projects/2020-12-06_Transmitting_Science/lab03/sim/"
+wd = "~/ts/lab03/sim/"
 setwd(wd)
 
 # Set up simulation parameters
