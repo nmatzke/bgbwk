@@ -1,0 +1,65 @@
+On Fri, Oct 24, 2025 at 4:09 PM XXX wrote:
+
+Dear Nicholas,
+
+Good day. I am XXX, from YYY
+
+I am currently integrating BSM into my study on the diversification of AAA across 7 regions. Nevertheless, I encountered some difficulty in the section "modification of state list" of your eample script (http://phylo.wikidot.com/biogeographical-stochastic-mapping-example-script#BSM_script). I understand that in your example, the codes is tailored for cases where certains islands become submerged. 
+However, in my system, none of the regions were completely submerged.  The crown group has a root age at 23 Mya, and S () only became fully emergent in the late Miocene to early Pliocene. S, M, and B were connected during periods of lowered sea levels. 
+
+Given this context, could you please advice how to appropriately adjust the code for my setup'? Specifically, would it be correct to simply use the code for  STRATUM 1, in which none of the regions are excluded, since all areas remain continuosly present through time?
+
+I look forward to hearing from you. 
+Best regards,
+XXX
+
+Nick Matzke <nickmatzke.ncse@gmail.com>
+9:41 PM (11 minutes ago)
+to me
+
+Hi XXX!  There are several things to think about:
+
+1. what areas are allowed in each time-period
+
+2. what ranges/states (a range is 0 or more areas) are allowed in each timeperiod? Note that ranges=states. DNA models have 4 states. Amino acid models have 20 states. Biogeography models can have many states, e.g. 2 areas (A, B) means 4 states/ranges - null, A, B, and AB
+
+If you think that A and B are always existing, but AB is an impossible range during a certain time-period (e.g. because they are very disconnected), you can remove the AB state from the list-of-states_lists for that timeperiod. 
+
+3. What are the distances between areas in each time period and how does that affect dispersal rates
+
+4. What is the connectivity in each time period and how does that affect dispersal rates
+
+Items #2-4 are all independent researcher decisions that represent certain hypotheses/models that a researcher postulates.  They are only connected in the researcher's brain, the computer doesn't know any better. But the researcher could say that A & B are touching in timeperiod 1, moderately distance in timeperiod 2, and very distant in timeperiod 3 (so distant that AB is impossible)
+
+This would involve:
+
+(2) editing the list of states lists so that AB is disallowed in t3.
+
+(3) using a distances matrix (typically relative distances, with the shortest distance between 1.0 and others being multiples of that) to represent the changing distances that have some (unknown) effect on dispersal rates.  Usually the "+x" model variant is used here, so that 
+
+actual_disperal_rate = base_rate * (relative_distance^x)
+
+The more negative x is, the more dispersal rate is penalized by increasing distance.
+
+(4) using a manual_dispersal_multipliers matrix to impose multipliers for dispersal between connected vs disconnected areas. i.e. 1.0 for connected, and 0.1 for disconnected. This can also be modeled with the w parameters.
+
+actual_disperal_rate = base_rate * (manual_dispersal_multiplier^x)
+
+It is perfectly possible to do all of these at once. What makes sense depends on your biological knowledge of the dispersal capabilities of your clade. However, you may get diminishing returns with using all of them -- I would start with just distances and then build on that.
+
+Please look carefully at the file formats to see how to do the matrices:
+
+http://phylo.wikidot.com/biogeobears#links_to_files
+
+#2 has to be done in the script, not in a matrix:
+
+Manually modify the states list in time-stratified analyses
+http://phylo.wikidot.com/example-biogeobears-scripts#modified_states_stratified
+
+#1 is just a special case of #2.
+
+Cheers,
+Nick
+
+
+
